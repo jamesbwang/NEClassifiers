@@ -15,18 +15,21 @@ def main():
 	triGramAnalyzer = nga.NGramAnalyzer(3)
 	print('made analyzer')
 	triGramAnalyzer.createNGramsTrainingSet()
+	triGramAnalyzer.createNGramsTrainingSet('train')
 	print('created trigram dataset')
 	del triGramAnalyzer
 
 	tetraGramAnalyzer = nga.NGramAnalyzer(4)
 	print('made analyzer')
 	tetraGramAnalyzer.createNGramsTrainingSet()
+	tetraGramAnalyzer.createNGramsTrainingSet('train')
 	print('created tetragram dataset')
 	del tetraGramAnalyzer
 
 	pentaGramAnalyzer = nga.NGramAnalyzer(5)
 	print('made analyzer')
 	pentaGramAnalyzer.createNGramsTrainingSet()
+	pentaGramAnalyzer.createNGramsTrainingSet('train')
 	print('created pentagram dataset')
 	del pentaGramAnalyzer
 	rf.trainandTestRF()
