@@ -34,7 +34,7 @@ class NGramAnalyzer:
 			try:
 				(self.__n_gram_vectorizer.fit_transform([row['pathogen']]))
 			except ValueError:
-				print('error \t' + str([row['pathogen']]))
+				print('error')
 			numPathGramCount += len(self.__n_gram_vectorizer.get_feature_names())
 			for pathNGram in self.__n_gram_vectorizer.get_feature_names():
 				if pathNGram.lower() not in pathGramIndex:
@@ -44,7 +44,7 @@ class NGramAnalyzer:
 				try:
 					(self.__n_gram_vectorizer.fit_transform(disList))
 				except ValueError:
-					print('error \t' + str(disList))
+					print('error')
 				numDisGramCount += len(self.__n_gram_vectorizer.get_feature_names())
 				for disNGram in self.__n_gram_vectorizer.get_feature_names():
 					if disNGram.lower() not in disGramIndex:
@@ -54,7 +54,7 @@ class NGramAnalyzer:
 				try:
 					(self.__n_gram_vectorizer.fit_transform(sympList))
 				except ValueError:
-					print('error \t' + str(sympList))
+					print('error')
 				self.__n_gram_vectorizer.fit_transform(sympList)
 				numSympGramCount += len(self.__n_gram_vectorizer.get_feature_names())
 				for sympNGram in self.__n_gram_vectorizer.get_feature_names():
@@ -78,7 +78,7 @@ class NGramAnalyzer:
 				try:
 					(self.__n_gram_vectorizer.fit_transform([words]))
 				except ValueError:
-					print('error \t' + str(words))
+					print('error')
 				numGrams += len(self.__n_gram_vectorizer.get_feature_names())
 				for gram in self.__n_gram_vectorizer.get_feature_names():
 					if gram.lower() not in gramIndex:
@@ -164,7 +164,7 @@ class NGramAnalyzer:
 			try:
 				self.__n_gram_vectorizer.fit_transform([str(row['WORD'])])
 			except ValueError:
-				print('error \t' + str(row['WORD']))
+				print('error')
 			for i in self.__n_gram_vectorizer.get_feature_names():
 				if i in allPossibleNGrams:
 					trainingDataSet.loc[index, i] = 1
