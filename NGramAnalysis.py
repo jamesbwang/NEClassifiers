@@ -137,7 +137,12 @@ class NGramAnalyzer:
 		fig = plt.gcf()
 		fig.savefig(os.path.join(self.__NGRAMS_DIR, 'fullNGrams.png'))
 
-	def createNGramsTrainingSet(self):
+	def createNGramsTrainingSet(self, name='test'):
+		path = constants.TESTDATA_DIR
+		newpath = constants.NGRAM_TESTING
+		if name == 'train':
+			path = constants.NER_DATASET_DIR
+			newpath = constants.NGRAM_TRAINING
 		taggingNGrams = self.__findNGramPatterns()
 		otherNGrams = self.__findIrrelevantNGrams()
 		if not os.path.exists(self.__NGRAMS_DIR):
@@ -152,7 +157,7 @@ class NGramAnalyzer:
 											 os.path.join(self.__NGRAMS_DIR, 'otherNGrams.csv')).sort_values(by='NGram')
 		allPossibleNGrams = set(pathdf['NGram']) | set(disdf['NGram']) | set(sympdf['NGram']) | set(otherdf['NGram'])
 		del pathdf, disdf, sympdf, otherdf, taggingNGrams, otherNGrams
-		trainingDataSet = pd.read_csv(constants.TESTDATA_DIR, index_col=0).drop('pos', axis=1).rename(
+		trainingDataSet = pd.read_csv(path, index_col=0).drop('pos', axis=1).rename(
 			columns={'word': 'WORD', 'tag': 'TAG', 'sentence_number': 'SENTENCE_NUMBER'}).join(
 			pd.DataFrame(columns=sorted(list(allPossibleNGrams)))).fillna(0)
 		for index, row in trainingDataSet.iterrows():
@@ -164,4 +169,4 @@ class NGramAnalyzer:
 				if i in allPossibleNGrams:
 					trainingDataSet.loc[index, i] = 1
 			self.__n_gram_vectorizer.get_feature_names().clear()
-		trainingDataSet.to_csv(os.path.join(self.__NGRAMS_DIR, constants.NGRAM_TESTING))
+		trainingDataSet.to_csv(os.path.join(self.__NGRAMS_DIR, newpath))

@@ -8,6 +8,7 @@ def main():
 	biGramAnalyzer = nga.NGramAnalyzer(2)
 	print('made analyzer')
 	biGramAnalyzer.createNGramsTrainingSet()
+	biGramAnalyzer.createNGramsTrainingSet('train')
 	print('created bigram dataset')
 	del biGramAnalyzer
 
